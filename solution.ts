@@ -93,7 +93,9 @@ const calculateTotalPrice = (products: Product[]) => {
         return 0
     } else {
         const totalPrice = products.reduce((acc, product) => {
-            return acc + (product.discount ? (product.price - product.price * (product.discount / 100)) * product.quantity : product.price * product.quantity)
+            const price = product.discount ? (product.price - product.price * (product.discount / 100)) : product.price
+            const quantity = product.quantity
+            return acc + (price * quantity)
         }, 0)
         return totalPrice
     }
