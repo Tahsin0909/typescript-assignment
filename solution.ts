@@ -3,7 +3,7 @@ const formatValue = (value: string | number | boolean) => {
         return value.toUpperCase()
     }
     else if (typeof value === "number") {
-        return value * value
+        return value * 10
     }
     else if (typeof value === "boolean") {
         return !value
@@ -13,6 +13,17 @@ const formatValue = (value: string | number | boolean) => {
     }
 }
 
-console.log(formatValue('hello'));
-console.log(formatValue(5));
-console.log(formatValue(true));
+
+const getLength = (value: string | any[]) => {
+
+    if (typeof value === "string") {
+        return value.length
+    }
+    else if (Array.isArray(value)) {
+        return value.length
+    }
+    else {
+        return value
+    }
+}
+
