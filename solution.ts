@@ -73,3 +73,13 @@ const printBookDetails = (item: Book) => {
     console.log(`Title: ${item.title}, Author: ${item.author}, Published: ${item.publishedYear}, Available: ${item.isAvailable ? "Yes" : "No"}`)
 }
 
+
+const getUniqueValues = (array1: number[], array2: number[]) => {
+    const set = new Set([...array1, ...array2]);
+    return Array.from(set)
+}
+
+
+const array1 = [1, 2, 3, 4, 5, 2, 33434, 434];
+const array2 = [3, 4, 5, 6, 7, 2342, 4343, 3, 4343];
+console.log(getUniqueValues(array1, array2));
