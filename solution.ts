@@ -60,3 +60,16 @@ type User = {
 const filterActiveUsers = (users: User[]) => {
     return users.filter(user => user.isActive === true)
 }
+
+
+interface Book {
+    title: string;
+    author: string;
+    publishedYear: number;
+    isAvailable: boolean;
+}
+
+const printBookDetails = (item: Book) => {
+    console.log(`Title: ${item.title}, Author: ${item.author}, Published: ${item.publishedYear}, Available: ${item.isAvailable ? "Yes" : "No"}`)
+}
+
