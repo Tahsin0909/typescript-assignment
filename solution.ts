@@ -1,12 +1,9 @@
-const formatValue = (value: string | number | boolean) => {
+const formatValue = (value: string | number | boolean): string | number | boolean => {
     if (typeof value === "string") {
         return value.toUpperCase()
     }
     else if (typeof value === "number") {
         return value * 10
-    }
-    else if (typeof value === "boolean") {
-        return !value
     }
     else {
         return value
@@ -14,17 +11,12 @@ const formatValue = (value: string | number | boolean) => {
 }
 
 
-const getLength = (value: string | any[]) => {
+const getLength = (value: string | any[]): number => {
 
     if (typeof value === "string") {
         return value.length
     }
-    else if (Array.isArray(value)) {
-        return value.length
-    }
-    else {
-        return value
-    }
+    return value.length
 }
 
 
@@ -46,9 +38,10 @@ type Items = {
     rating: number;
 }
 
-const filterByRating = (items: Items[]) => {
-    return items.filter(item => item.rating > 4)
+const filterByRating = (items: Items[]): Items[] => {
+    return items.filter(item => item.rating >= 4)
 }
+
 
 type User = {
     id: number;
@@ -57,7 +50,7 @@ type User = {
     isActive: boolean;
 }
 
-const filterActiveUsers = (users: User[]) => {
+const filterActiveUsers = (users: User[]): User[] => {
     return users.filter(user => user.isActive === true)
 }
 
@@ -74,10 +67,31 @@ const printBookDetails = (item: Book) => {
 }
 
 
-const getUniqueValues = (array1: number[], array2: number[]) => {
-    const set = new Set([...array1, ...array2]);
-    return Array.from(set)
-}
+const getUniqueValues = (array1: number[], array2: number[]): number[] => {
+    const result: number[] = [];
+
+    const contains = (arr: number[], value: number): boolean => {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === value) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    for (let i = 0; i < array1.length; i++) {
+        if (!contains(result, array1[i])) {
+            result.push(array1[i]);
+        }
+    }
+    for (let i = 0; i < array2.length; i++) {
+        if (!contains(result, array2[i])) {
+            result.push(array2[i]);
+        }
+    }
+
+    return result;
+};
 
 
 type Product = {
@@ -88,7 +102,7 @@ type Product = {
 }
 
 
-const calculateTotalPrice = (products: Product[]) => {
+const calculateTotalPrice = (products: Product[]): number => {
     if (products.length === 0) {
         return 0
     } else {
