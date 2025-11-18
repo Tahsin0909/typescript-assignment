@@ -1,135 +1,85 @@
-Explain the difference between any, unknown, and never types in TypeScript.
-১) any
+### 1.Explain the difference between any, unknown, and never types in TypeScript.
 
-যেকোনো ভ্যালু রাখা যায় (string, number, object—সব)
-
-TypeScript কোনো চেক করবে না
-
-ভুল হলেও error দিবে না
-
-beginner দের জন্য dangerous, কারণ bug ধরা কঠিন হয়
-
-উদাহরণ:
-
-let x: any;
-
-x = 10;
-x = "hello";
-x = true;
-
-x.nonExistingFunction(); // কোনো error দিবে না (dangerous)
-
-২) unknown
-
-এটাও যেকোনো ভ্যালু নিতে পারে
-
-কিন্তু ব্যবহার করার আগে type check করতে হবে
-
-এটি নিরাপদ version of any
-
-উদাহরণ:
-
-let y: unknown;
-
-y = "hello";
-y = 20;
-
-// সরাসরি ব্যবহার করলে error
-// y.toUpperCase(); ❌
-
-// আগে চেক করতে হবে
-if (typeof y === "string") {
-  y.toUpperCase(); // এখন ঠিক আছে ✔️
-}
+----
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>টাইপ</th>
+      <th>বর্ণনা</th>
+      <th>টাইপ চেকিং</th>
+      <th>যেকোনো ভ্যালু রাখা যাবে?</th>
+      <th>সরাসরি ব্যবহার করা নিরাপদ?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>any</code></td>
+      <td>যেকোনো ভ্যালু রাখা যায় (যেমন: string, number, object — সব কিছু)</td>
+      <td>TypeScript কোনো চেক করবে না</td>
+      <td>হ্যাঁ</td>
+      <td>না — ভুল হলেও এরর দেখাবে না, বাগ ধরা খুব কঠিন হয়ে যায়</td>
+    </tr>
+    <tr>
+      <td><code>unknown</code></td>
+      <td>এটিও যেকোনো ভ্যালু গ্রহণ করতে পারে</td>
+      <td>ব্যবহারের আগে অবশ্যই টাইপ চেক করতে হবে (যেমন: typeof দিয়ে)</td>
+      <td>হ্যাঁ</td>
+      <td>হ্যাঁ — <code>any</code>-এর চেয়ে অনেক বেশি নিরাপদ</td>
+    </tr>
+    <tr>
+      <td><code>never</code></td>
+      <td>এমন টাইপ যা কখনো কোনো ভ্যালু পায় না (যেমন: সবসময় error থ্রো করে বা infinite loop)</td>
+      <td>সম্পূর্ণ নিরাপদ (কারণ রানটাইমে কোনো ভ্যালু থাকে না)</td>
+      <td>না — কোনো ভ্যালু অ্যাসাইন করা যায় না</td>
+      <td>না — এটি ব্যবহার করা যায় না (কারণ এর কোনো ভ্যালু নেই)</td>
+    </tr>
+  </tbody>
+</table>
 
 
-unknown = নিরাপদ any
-any = খুব বেশি ফ্রি, তাই ভুল ধরতে পারে না
+### 2. Provide an example of using union and intersection types in TypeScript.
 
-৩) never
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>বৈশিষ্ট্য</th>
+      <th>Union Type (`|`)</th>
+      <th>Intersection Type (`&`)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>অর্থ</strong></td>
+      <td>“A <strong>অথবা</strong> B” — যেকোনো একটি টাইপ হতে পারে</td>
+      <td>“A <strong>এবং</strong> B” — দুটো টাইপের <strong>সব প্রোপার্টি একসাথে</strong> থাকতে হবে</td>
+    </tr>
+    <tr>
+      <td><strong>সিম্বল</strong></td>
+      <td><code>|</code> (পাইপ)</td>
+      <td><code>&</code> (অ্যাম্পারস্যান্ড)</td>
+    </tr>
+    <tr>
+      <td><strong>উদাহরণ</strong></td>
+      <td>
+        <pre><code>let value: string | number;
+value = "hello"; 
+value = 42; </code></pre>
+      </td>
+      <td>
+        <pre><code>type Person = { name: string };
+type Employee = { id: number };
+type Staff = Person & Employee;
 
-এমন টাইপ যা কখনো কোনো ভ্যালু পায় না
-
-যেমন:
-
-সবসময় error throw করে
-
-বা কোনো infinite loop
-
-উদাহরণ ১: Error throw
-
-function fail(message: string): never {
-  throw new Error(message);
-}
-
-
-উদাহরণ ২: Infinite loop
-
-function loopForever(): never {
-  while (true) {}
-}
-
-never = কোনো দিন ভ্যালু রিটার্ন হবে না
-
-
-Provide an example of using union and intersection types in TypeScript.
-
-Union টা কী?
-
-একটা ভেরিয়েবল একাধিক টাইপের যেকোনো একটি হতে পারে।
-
-উদাহরণ:
-
-let value: string | number;
-
-value = "hello"; // ঠিক
-value = 100;     // ঠিক
-
-
-Union = OR
-(দুইটার যেকোনো একটা)
-
-আরও উদাহরণ:
-function printId(id: string | number) {
-  console.log(id);
-}
-
-printId("123");
-printId(456);
-
-Intersection টা কী?
-
-দুইটা টাইপ একসাথে merge হয়ে যায়।
-মানে: দুটার সব property ই থাকতে হবে।
-
-উদাহরণ:
-
-type A = { name: string };
-type B = { age: number };
-
-type C = A & B;  // merge
-
-const person: C = {
-  name: "Tahsin",
-  age: 21,
-};
-
-
-Intersection = AND
-(দুটোই থাকতে হবে)
-
-আরেকটা উদাহরণ:
-type X = { id: number };
-type Y = { isAdmin: boolean };
-
-type User = X & Y;
-
-const u: User = {
-  id: 1,
-  isAdmin: true,
-};
-
-Union vs Intersection (সহজ তুলনা)
-টাইপ	মানে	উদাহরণ
-**Union (	)**	যেকোনো একটাই
-Intersection (&)	দুটাই একসাথে	{name} & {age}
+const p: Staff = {
+  name: "রহিম",
+  id: 101
+}; </code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>ব্যবহারের ক্ষেত্র</strong></td>
+      <td>যখন একটি ভ্যারিয়েবল একাধিক টাইপের হতে পারে (যেমন: ID হতে পারে string বা number)</td>
+      <td>যখন দুটি বা ততোধিক টাইপের সব ফিচার একসাথে দরকার (যেমন: ইউজার + অ্যাডমিন)</td>
+    </tr>
+  </tbody>
+</table>
