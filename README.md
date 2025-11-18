@@ -61,19 +61,19 @@
     <tr>
       <td><strong>উদাহরণ</strong></td>
       <td>
-        <pre><code>let value: string | number;
+        <code>let value: string | number;
 value = "hello"; 
-value = 42; </code></pre>
+value = 42; </code>
       </td>
       <td>
-        <pre><code>type Person = { name: string };
+        <code>type Person = { name: string };
 type Employee = { id: number };
 type Staff = Person & Employee;
 
 const p: Staff = {
   name: "রহিম",
   id: 101
-}; </code></pre>
+}; </code>
       </td>
     </tr>
     <tr>
