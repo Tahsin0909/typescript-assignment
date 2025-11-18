@@ -50,13 +50,13 @@
   <tbody>
     <tr>
       <td><strong>অর্থ</strong></td>
-      <td>“A <strong>অথবা</strong> B” — যেকোনো একটি টাইপ হতে পারে</td>
-      <td>“A <strong>এবং</strong> B” — দুটো টাইপের <strong>সব প্রোপার্টি একসাথে</strong> থাকতে হবে</td>
+      <td>“টাইপ A <strong>অথবা</strong> টাইপ B” — যেকোনো একটি টাইপ হতে পারে</td>
+      <td>“টাইপ A <strong>এবং</strong> টাইপ B” — দুটো টাইপের <strong>সব প্রোপার্টি একসাথে</strong> থাকতে হবে</td>
     </tr>
     <tr>
       <td><strong>সিম্বল</strong></td>
-      <td><code>|</code> (পাইপ)</td>
-      <td><code>&</code> (অ্যাম্পারস্যান্ড)</td>
+      <td><code>|</code></td>
+      <td><code>&</code></td>
     </tr>
     <tr>
       <td><strong>উদাহরণ</strong></td>
